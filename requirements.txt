@@ -1,0 +1,12 @@
+Flask
+Flask-SQLAlchemy
+Flask-RESTful
+Flask-Marshmallow
+marshmallow
+marshmallow-sqlalchemy
+Flask-JWT-Extended
+psycopg2-binary
+python-dotenv
+gunicorn
+email-validator
+pytest
