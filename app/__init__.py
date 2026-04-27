@@ -70,6 +70,7 @@ def create_app(test_config=None):
             "email": item.email
         }), 201
 
+
     @app.get("/blacklists/<string:email>")
     @require_bearer_token
     def check_blacklist(email):
