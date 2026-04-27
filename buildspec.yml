@@ -8,6 +8,7 @@ phases:
       - echo "Installing dependencies"
       - python -m pip install --upgrade pip
       - pip install -r requirements.txt
+      - mkdir -p artifact/.ebextensions
 
   pre_build:
     commands:
@@ -17,7 +18,6 @@ phases:
     commands:
       - pytest -v
       - echo "Packaging artifact"
-      - mkdir -p artifact/.ebextensions
       - cp -r app artifact/
       - cp application.py artifact/
       - cp requirements.txt artifact/
@@ -25,7 +25,7 @@ phases:
 
   post_build:
     commands:
-      - echo "Build completed successfully"
+      - echo "Build finished"
 
 artifacts:
   base-directory: artifact
