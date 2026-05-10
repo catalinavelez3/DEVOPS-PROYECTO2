@@ -1,0 +1,12 @@
+venv
+__pycache__
+.pytest_cache
+.git
+.gitignore
+.env
+*.pyc
+*.pyo
+*.pyd
+py2.zip
+DEVOPS-PY2
+.ebextensions
