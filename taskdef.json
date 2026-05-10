@@ -1,0 +1,56 @@
+{
+  "family": "blacklist-task",
+  "networkMode": "awsvpc",
+  "executionRoleArn": "arn:aws:iam::336934304904:role/ecsTaskExecutionRole",
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "cpu": "512",
+  "memory": "1024",
+  "runtimePlatform": {
+    "cpuArchitecture": "X86_64",
+    "operatingSystemFamily": "LINUX"
+  },
+  "containerDefinitions": [
+    {
+      "name": "blacklist-container",
+      "image": "<IMAGE1_NAME>",
+      "essential": true,
+      "portMappings": [
+        {
+          "name": "blacklist-5000",
+          "containerPort": 5000,
+          "hostPort": 5000,
+          "protocol": "tcp",
+          "appProtocol": "http"
+        }
+      ],
+      "environment": [
+        {
+          "name": "DATABASE_URL",
+          "value": "sqlite:///blacklist.db"
+        },
+        {
+          "name": "STATIC_BEARER_TOKEN",
+          "value": "token-super-secreto"
+        },
+        {
+          "name": "SECRET_KEY",
+          "value": "dev-secret-key"
+        },
+        {
+          "name": "JWT_SECRET_KEY",
+          "value": "jwt-secret-key"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/blacklist-task",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    }
+  ]
+}

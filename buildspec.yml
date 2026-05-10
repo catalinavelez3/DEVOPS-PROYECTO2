@@ -5,29 +5,36 @@ phases:
     runtime-versions:
       python: 3.11
     commands:
-      - echo "Installing dependencies"
+      - echo "Installing Python dependencies..."
       - python -m pip install --upgrade pip
       - pip install -r requirements.txt
-      - mkdir -p artifact/.ebextensions
+      - pip install pytest
 
   pre_build:
     commands:
-      - echo "Running tests"
+      - echo "Running tests..."
+      - pytest -v
+      - echo "Logging in to Amazon ECR..."
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+      - REPOSITORY_URI=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME
+      - IMAGE_TAG=latest
 
   build:
     commands:
-      - pytest -v
-      - echo "Packaging artifact"
-      - cp -r app artifact/
-      - cp application.py artifact/
-      - cp requirements.txt artifact/
-      - cp -r .ebextensions artifact/
+      - echo "Building Docker image..."
+      - docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG .
+      - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $REPOSITORY_URI:$IMAGE_TAG
 
   post_build:
     commands:
-      - echo "Build finished"
+      - echo "Pushing Docker image to ECR..."
+      - docker push $REPOSITORY_URI:$IMAGE_TAG
+      - echo "Creating imageDetail.json..."
+      - printf '{"ImageURI":"%s"}' $REPOSITORY_URI:$IMAGE_TAG > imageDetail.json
+      - echo "Build completed on `date`"
 
 artifacts:
-  base-directory: artifact
   files:
-    - '**/*'
+    - appspec.json
+    - taskdef.json
+    - imageDetail.json
