@@ -10,8 +10,8 @@ phases:
       - pip install -r requirements.txt
       - pip install pytest
 
-  pre_build:
-    commands:
+  #pre_build:
+    #commands:
       - echo "Running tests..."
       - pytest -v
       - echo "Logging in to Amazon ECR..."
@@ -37,3 +37,4 @@ artifacts:
   files:
     - appspec.json
     - taskdef.json
+    - imageDetail.json
