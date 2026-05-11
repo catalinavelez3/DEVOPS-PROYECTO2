@@ -41,7 +41,7 @@ def auth_headers():
 
 
 def test_health_returns_200(client):
-    response = client.get("/healthzs")
+    response = client.get("/healthz")
     assert response.status_code == 200
     assert response.get_json()["status"] == "ok"
 
