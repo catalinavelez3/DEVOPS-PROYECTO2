@@ -28,7 +28,7 @@ def create_app(test_config=None):
 
     create_schema = BlacklistCreateSchema()
 
-    @app.get("/heal")
+    @app.get("/health")
     def health():
         return {"status": "ok"}, 200
 
