@@ -19,8 +19,8 @@
       "portMappings": [
         {
           "name": "blacklist-5000",
-          "containerPort": 5001,
-          "hostPort": 5001,
+          "containerPort": 20,
+          "hostPort": 20,
           "protocol": "tcp",
           "appProtocol": "http"
         }
