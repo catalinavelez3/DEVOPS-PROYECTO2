@@ -41,6 +41,20 @@
         {
           "name": "JWT_SECRET_KEY",
           "value": "jwt-secret-key"
+        },
+        {
+          "name": "NEW_RELIC_APP_NAME",
+          "value": "blacklist-prod"
+        },
+        {
+          "name": "NEW_RELIC_LOG",
+          "value": "stdout"
+        }
+      ],
+      "secrets": [
+        {
+          "name": "NEW_RELIC_LICENSE_KEY",
+          "valueFrom": "arn:aws:secretsmanager:us-east-1:336934304904:secret:newrelic/license-YaMlHT"
         }
       ],
       "logConfiguration": {
