@@ -52,10 +52,10 @@
         }
       ],
       "secrets": [
-        {
-          "name": "NEW_RELIC_LICENSE_KEY",
-          "valueFrom": "arn:aws:secretsmanager:us-east-1:336934304904:secret:newrelic/license-YaMlHT"
-        }
+      {
+        "name": "NEW_RELIC_LICENSE_KEY",
+        "valueFrom": "arn:aws:secretsmanager:us-east-1:336934304904:secret:newrelic/license-plain-ZpZ1jJ"
+      }
       ],
       "logConfiguration": {
         "logDriver": "awslogs",
