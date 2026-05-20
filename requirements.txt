@@ -10,3 +10,4 @@ python-dotenv
 gunicorn
 email-validator
 pytest
+newrelic
