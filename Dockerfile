@@ -10,4 +10,4 @@ COPY . .
 
 EXPOSE 5000
 
-CMD ["newrelic-admin", "run-program", "python", "application.py"]
+CMD ["newrelic111-admin", "run-program", "python", "application.py"]
